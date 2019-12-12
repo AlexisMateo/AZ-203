@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="dotenv.net" Version="1.0.6" />
+    <PackageReference Include="Microsoft.Azure.Cosmos" Version="3.5.1" />
+    <PackageReference Include="Microsoft.Azure.DocumentDB" Version="2.9.2" />
+  </ItemGroup>
+
+</Project>
