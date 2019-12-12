@@ -1,4 +1,5 @@
 ﻿using System;
+using CosmoDbExample.Models;
 using dotenv.net;
 using TableStorageExample.Models;
 using TableStorageExample.Repository;
@@ -14,16 +15,20 @@ namespace CosmoDbExample
         }
 
           
-        public static async void AddYoutubeStat()
+        public static void AddYoutubeStat()
         {
-            YoutubeStatModel youtubeStatModel = new YoutubeStatModel();
-            youtubeStatModel.Id="111";
-            youtubeStatModel.Clicks= "256";
-            youtubeStatModel.Criteria = "Automobiles";
-            youtubeStatModel.Impressions = "1024";
+            YoutubeStatModel youtubeStatModel = new YoutubeStatModel
+            {
+                Id = "4891",
+                Clicks="165",
+                Criteria="Doctor",
+                Impressions="798",
+                PartitionKey="Doctor"
+            };
 
             YoutubeRepository youtubeRepository = new YoutubeRepository();
-            await youtubeRepository.AddYoutubeStat(youtubeStatModel);
+            youtubeRepository.AddYoutubeStat(youtubeStatModel);
         }
+ 
     }
 }

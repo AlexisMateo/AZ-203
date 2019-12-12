@@ -3,28 +3,29 @@ using Microsoft.Azure.Cosmos;
 using System.Net;
 using System.Threading.Tasks;
 using System;
+using CosmoDbExample.Models;
 
 namespace TableStorageExample.Repository
 {
-    public class YoutubeRepository: BaseRepository
+    public class YoutubeRepository
     {
-
-        private readonly Database dataBase; 
-        private readonly Container container; 
-        public YoutubeRepository()
+        public int AddYoutubeStat(YoutubeStatModel youtubeStat)
         {
-            dataBase=this.cosmoClient.GetDatabase("metricsdb");
-            container=this.cosmoClient.GetContainer("metricsdb","youtube_stat");
-        }
+            using (var context = new MetricsDbContext())
+            {
 
-        public async Task<HttpStatusCode> AddYoutubeStat(YoutubeStatModel youtubeStat)
-        {
-            var partionKey = new PartitionKey(youtubeStat.Criteria);
-            ItemResponse<YoutubeStatModel> youtubeStatReponse = await this.container.ReadItemAsync<YoutubeStatModel>(youtubeStat.Id, partionKey);
+                context.Add(youtubeStat);
 
-            Console.WriteLine(youtubeStat);
-            
-            return youtubeStatReponse.StatusCode;
+                try
+                {
+                  int response =context.SaveChanges();
+                  return response;
+                }
+                catch (Exception ex)
+                {
+                    return ex.HResult;
+                }
+            }
         } 
 
     }

@@ -8,6 +8,8 @@ namespace TableStorageExample.Models
         public string Criteria { get; set; }
         public string Impressions { get; set; }
         public string Clicks { get; set; }
+        public string PartitionKey { get; set; }
+
 
         public override string ToString()
         {
