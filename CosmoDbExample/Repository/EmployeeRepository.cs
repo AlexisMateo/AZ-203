@@ -4,6 +4,8 @@ using System.Net;
 using System.Threading.Tasks;
 using System;
 using CosmoDbExample.Models;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace TableStorageExample.Repository
 {
@@ -24,6 +26,22 @@ namespace TableStorageExample.Repository
                 catch (Exception ex)
                 {
                     return ex.HResult;
+                }
+            }
+        } 
+
+        public List<YoutubeStatModel> GetYoutubeStat()
+        {
+            using (var context = new MetricsDbContext())
+            {
+                try
+                {
+                  List<YoutubeStatModel> youtubeStats =context.YoutubeStats.ToList();
+                  return youtubeStats;
+                }
+                catch (Exception ex)
+                {
+                    return new List<YoutubeStatModel>();
                 }
             }
         } 

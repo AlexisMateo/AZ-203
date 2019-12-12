@@ -11,7 +11,7 @@ namespace CosmoDbExample
         static void Main(string[] args)
         {
             DotEnv.Config();
-            AddYoutubeStat();
+            GetYoutubeStat();
         }
 
           
@@ -28,6 +28,12 @@ namespace CosmoDbExample
 
             YoutubeRepository youtubeRepository = new YoutubeRepository();
             youtubeRepository.AddYoutubeStat(youtubeStatModel);
+        }
+
+        public static void GetYoutubeStat()
+        {
+            YoutubeRepository youtubeRepository = new YoutubeRepository();
+            youtubeRepository.GetYoutubeStat();
         }
  
     }
