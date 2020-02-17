@@ -1,29 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "/home/alexis/Desktop/AZ-203/CosmoDbExample/CosmoDbExample.csproj": {}
+    "/Users/alexismateo/Desktop/AZ-203/CosmoDbExample/CosmoDbExample.csproj": {}
   },
   "projects": {
-    "/home/alexis/Desktop/AZ-203/CosmoDbExample/CosmoDbExample.csproj": {
+    "/Users/alexismateo/Desktop/AZ-203/CosmoDbExample/CosmoDbExample.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/alexis/Desktop/AZ-203/CosmoDbExample/CosmoDbExample.csproj",
+        "projectUniqueName": "/Users/alexismateo/Desktop/AZ-203/CosmoDbExample/CosmoDbExample.csproj",
         "projectName": "CosmoDbExample",
-        "projectPath": "/home/alexis/Desktop/AZ-203/CosmoDbExample/CosmoDbExample.csproj",
-        "packagesPath": "/home/alexis/.nuget/packages/",
-        "outputPath": "/home/alexis/Desktop/AZ-203/CosmoDbExample/obj/",
+        "projectPath": "/Users/alexismateo/Desktop/AZ-203/CosmoDbExample/CosmoDbExample.csproj",
+        "packagesPath": "/Users/alexismateo/.nuget/packages/",
+        "outputPath": "/Users/alexismateo/Desktop/AZ-203/CosmoDbExample/obj/",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "/home/alexis/.nuget/NuGet/NuGet.Config"
+          "/Users/alexismateo/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netcoreapp3.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "netcoreapp3.0": {
             "projectReferences": {}
           }
         },
@@ -34,7 +37,7 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "netcoreapp3.0": {
           "dependencies": {
             "AutoMapper": {
               "target": "Package",
@@ -72,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.100/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/3.0.101/RuntimeIdentifierGraph.json"
         }
       }
     }

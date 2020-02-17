@@ -1,0 +1,56 @@
+{
+  "accountEnabled": true,
+  "addIns": [],
+  "alternativeNames": [],
+  "appDisplayName": "azure-cli-2020-01-20-13-54-37",
+  "appId": "02a5884b-aef4-44bd-8989-5647110c8920",
+  "appOwnerTenantId": "02c860c2-e11e-4317-a197-1906431866fd",
+  "appRoleAssignmentRequired": false,
+  "appRoles": [],
+  "applicationTemplateId": null,
+  "deletionTimestamp": null,
+  "displayName": "azure-cli-2020-01-20-13-54-37",
+  "errorUrl": null,
+  "homepage": "https://azure-cli-2020-01-20-13-54-37",
+  "informationalUrls": {
+    "marketing": null,
+    "privacy": null,
+    "support": null,
+    "termsOfService": null
+  },
+  "keyCredentials": [],
+  "logoutUrl": null,
+  "notificationEmailAddresses": [],
+  "oauth2Permissions": [
+    {
+      "adminConsentDescription": "Allow the application to access azure-cli-2020-01-20-13-54-37 on behalf of the signed-in user.",
+      "adminConsentDisplayName": "Access azure-cli-2020-01-20-13-54-37",
+      "id": "beba4a52-889f-4bdd-8235-2321afb22321",
+      "isEnabled": true,
+      "type": "User",
+      "userConsentDescription": "Allow the application to access azure-cli-2020-01-20-13-54-37 on your behalf.",
+      "userConsentDisplayName": "Access azure-cli-2020-01-20-13-54-37",
+      "value": "user_impersonation"
+    }
+  ],
+  "objectId": "556af376-fb85-41c5-9e39-0917213d41cc",
+  "objectType": "ServicePrincipal",
+  "odata.metadata": "https://graph.windows.net/02c860c2-e11e-4317-a197-1906431866fd/$metadata#directoryObjects/@Element",
+  "odata.type": "Microsoft.DirectoryServices.ServicePrincipal",
+  "passwordCredentials": [],
+  "preferredSingleSignOnMode": null,
+  "preferredTokenSigningKeyEndDateTime": null,
+  "preferredTokenSigningKeyThumbprint": null,
+  "publisherName": "Caribe Servicios De Informacion",
+  "replyUrls": [],
+  "samlMetadataUrl": null,
+  "samlSingleSignOnSettings": null,
+  "servicePrincipalNames": [
+    "http://azure-cli-2020-01-20-13-54-37",
+    "02a5884b-aef4-44bd-8989-5647110c8920"
+  ],
+  "servicePrincipalType": "Application",
+  "signInAudience": "AzureADMyOrg",
+  "tags": [],
+  "tokenEncryptionKeyId": null
+}

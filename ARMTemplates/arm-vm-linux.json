@@ -1,0 +1,169 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+    ""
+    },
+    "resources": [
+        {
+            "type": "Microsoft.Storage/storageAccounts",
+            "apiVersion": "2019-04-01",
+            "kind": "BlobStorage",
+            "location": "[resourceGroup().location]",
+            "name": "starmstoragealovera",
+            "sku": {
+                "name": "Standard_LRS"
+            },
+            "properties":{
+                "accessTier":"Cool"
+            }
+        },
+        {
+            "type": "Microsoft.Network/networkSecurityGroups",
+            "apiVersion": "2019-08-01",
+            "location": "[resourceGroup().location]",
+            "name": "nsg-armtemplate",
+            "properties": {
+                "securityRules": [{
+                    "name": "SSH",
+                    "properties": {
+                        "protocol": "Tcp",
+                        "sourcePortRange": "*",
+                        "destinationPortRange": "22",
+                        "sourceAddressPrefix": "*",
+                        "destinationAddressPrefix": "*",
+                        "access": "Allow",
+                        "priority": 123,
+                        "direction": "Inbound"
+                    }
+                },{
+                    "name":"ICMP-allow",
+                    "properties":{
+                        "protocol":"Icmp",
+                        "sourcePortRange":"*",
+                        "destinationPortRange":"*",
+                        "sourceAddressPrefix": "*",
+                        "destinationAddressPrefix":"*",
+                        "access":"Allow",
+                        "priority":133,
+                        "direction":"Inbound"
+                    }
+                }]
+            }
+        },
+        {
+            "name": "pip-armtemplate",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "apiVersion": "2015-06-15",
+            "location": "[resourceGroup().location]",
+            "properties": {
+                "publicIPAllocationMethod": "Dynamic",
+                "dnsSettings": {
+                    "domainNameLabel": "armtemplateokf"
+                }
+            }
+        },
+        {
+            "type":"Microsoft.Network/virtualNetworks",
+            "apiVersion":"2015-06-15",
+            "location":"[resourceGroup().location]",
+            "name":"vnet-armtemplate",
+            "dependsOn":[
+                "[resourceId('Microsoft.Network/networkSecurityGroups','nsg-armtemplate')]"
+            ],
+            "properties":{
+                "addressSpace":{
+                    "addressPrefixes":[
+                        "10.0.0.0/16"
+                    ]
+                },
+                "subnets":[
+                    {
+                        "name":"subnet-armtemplate",
+                        "properties":{
+                            "addressPrefix":"10.0.0.0/24",
+                            "networkSecurityGroup":{
+                                "id":"[resourceId('Microsoft.Network/networkSecurityGroups','nsg-armtemplate')]"
+                            }
+                        }
+                    }
+                ]
+                
+            }
+        },
+        {
+            "type":"Microsoft.Network/networkInterfaces",
+            "apiVersion":"2015-06-15",
+            "location":"[resourceGroup().location]",
+            "name":"nic-armtemplate",
+            "dependsOn":[
+                "[resourceId('Microsoft.Network/publicIPAddresses','pip-armtemplate')]",
+                "[resourceId('Microsoft.Network/virtualNetworks','vnet-armtemplate')]"
+            ],
+            "properties":{
+                "ipConfigurations":[
+                    {
+                        "name":"ipconfig1",
+                        "properties":{
+                            "privateIPAllocationMethod":"Dynamic",
+                            "publicIPAddress":{
+                                "id":"[resourceId('Microsoft.Network/publicIPAddresses','pip-armtemplate')]"
+                            },
+                            "subnet":{
+                                "id":"[resourceId('Microsoft.Network/virtualNetworks/subnets','vnet-armtemplate','subnet-armtemplate')]"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "type":"Microsoft.Compute/virtualMachines",
+            "apiVersion":"2019-03-01",
+            "location":"[resourceGroup().location]",
+            "name":"vm-armtemplate",
+            "dependsOn":[
+                "[resourceId('Microsoft.Network/networkInterfaces','nic-armtemplate')]",
+                "[resourceId('Microsoft.Storage/storageAccounts','starmstoragealovera')]"
+            ],
+            "properties":{
+                "hardwareProfile":{
+                    "vmSize":"Basic_A0"
+                },
+                "osProfile":{
+                    "computerName":"armtemplate-server",
+                    "adminUsername":"armtemplateadmin",
+                    "linuxConfiguration":{
+                        "disablePasswordAuthentication":true,
+                        "ssh":{
+                            "publicKeys":[
+                                {
+                                    "path": "/home/armtemplateadmin/.ssh/authorized_keys",
+                                    "keyData":"ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCrn7TMjI7ovpg5hO+H42yoCM4u3dC3mFfE4YcqZ2kFfz4J330MEKjW6mjwZtthW4YdzvsCGVJuO1JBTSVzSlyaLa6zsTBUx8ObWhG3ys4FQdLg0uA2E9Mjv7mhhCMQWGFOn8CbuT82AyMfm29mT2x2AgPe7117/BmcN+zWR/uPe7np4hbFB30SYOEhUZfZr0Bcbq1IbtNaNUhPtNsR+bsyAgXryeUk7Eo4KHpw0+i+oBXgaW2LttNLbxyjjn85Uh7TO0Ex6cOV5/bCdxv31Ki6qhMR9QSadNS7Tbm8iSXreYquSHt2rSRTMQlA33alptk4LgKNRmgbEK0FlZwPC2f5 alexismateo@H244S50KIGQ50.local"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "storageProfile":{
+                    "imageReference":{
+                        "publisher":"Canonical",
+                        "offer":"UbuntuServer",
+                        "sku":"18.04-LTS",
+                        "version":"latest"
+                    },
+                    "osDisk":{
+                        "createOption":"FromImage"
+                    }
+                },
+                "networkProfile":{
+                    "networkInterfaces":[
+                        {
+                            "id":"[resourceId('Microsoft.Network/networkInterfaces','nic-armtemplate')]"
+                        }
+                    ]
+                }
+            }
+        }
+    ]
+}
